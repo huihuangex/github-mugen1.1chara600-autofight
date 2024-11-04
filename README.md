@@ -1,6 +1,5 @@
 # mugen1.1chara600-autofight
-git测试
-git测试
+测试完成
 
 多人对战
 观看模式用这个
