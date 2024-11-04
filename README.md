@@ -1,4 +1,6 @@
 # mugen1.1chara600-autofight
+git测试
+
 
 多人对战
 观看模式用这个
@@ -12,7 +14,6 @@ three or four players in simultaneous mode.  This really only works in
 watch mode after pushing ctrl+1 to enable your player.  If you try this
 in other modes, all of your teammates will be controlled as if they're
 player 1.  That's not very fun.
-
 
 
 生存模式用这个
