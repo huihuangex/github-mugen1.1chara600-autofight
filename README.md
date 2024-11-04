@@ -1,0 +1,1 @@
+# mugen1.1chara600-autofight
