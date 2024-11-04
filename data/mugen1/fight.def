@@ -1,0 +1,679 @@
+﻿;该文档由千寻平台翻译，如果您是MUGEN爱好者，欢迎访问qxmugen.com！
+
+; 战斗界面定义
+
+; 画面包: MUGEN1
+; 分辨率: 1280x720
+; 需要: MUGEN 1.1
+
+; 关于字体:
+;   - 可以在[Files]区下定义10个字体.
+;   - 这里的字体不会影响fight.def中的字体
+;   - 系统会按以下顺序检索字体文件:
+;     1. system.def指定的路径
+;     2. mugen主程序同级目录 (不推荐将更改过的字体文件放在这里)
+;     3. 主程序同级的data文件夹下 (不推荐将更改过的字体文件放在这里)
+;     4. 主程序同级的font文件夹下
+;
+; 见文件最后的 "如何自定义"
+
+;-----------------------------------------------------------
+;系统会按以下顺序检索文件:
+;1. fight.def指定的路径
+;2. 主程序同级的data文件夹下
+;3. mugen主程序同级目录
+
+[Files]
+sff = fight.sff		;血条图片文件名
+snd = fight.snd		;战斗音效
+font1 = enter48.def	;字体1的名字
+font2 = num48.def	;字体2的名字
+font3 = name14.def
+font4 = num1.def
+fightfx.sff = fightfx.sff	;默认战斗火花图片文件
+fightfx.air = fightfx.air	;默认战斗火花动作文件
+common.snd = common.snd		;通用动作音效
+
+;-----------------------------------------------------------
+[FightFx]
+scale = 4	;默认战斗火花的缩放比例
+
+;-----------------------------------------------------------
+[Lifebar]
+;Player 1的血条参数
+p1.pos    = 590,40	;p1血条的坐标，左上为0,0点
+p1.bg0.anim = 10	;血条的暗色背景动画编号
+p1.bg0.offset = -6,6	;相对于血条的偏移量
+p1.bg1.spr = 11,0	;空血条界面的图片编号
+p1.mid.anim = 12	;损血时的血条动画编号
+p1.mid.offset = -6,6	;损血时的血条的偏移量
+p1.front.spr = 13,0	;血条的图片编号
+p1.front.offset = -6,6	;血条的图片编号
+p1.range.x  = -6,-433	;血条拉伸至左右的相对坐标，要设定的刚好和空血条对上
+;Player 2的血条参数，同1p
+p2.pos    = 690,40
+p2.bg0.anim = 10
+p2.bg0.offset = 6,6
+p2.bg0.facing = -1	;让图片水平翻转
+p2.bg1.spr = 11,0
+p2.bg1.facing = -1
+p2.mid.anim = 12
+p2.mid.offset = 6,6
+p2.mid.facing = -1
+p2.front.spr = 13,0
+p2.front.offset = 6,6
+p2.front.facing = -1
+p2.range.x = 6,433
+
+[Begin Action 10] ;血条变暗的背景 
+10,0, 0,0, 1, , AS224D32
+
+[Begin Action 12] ;Blinking lifebar midground
+12,0, 0,0, 1
+12,1, 0,0, 1
+12,2, 0,0, 1
+12,3, 0,0, 1
+12,4, 0,0, 1
+12,5, 0,0, 1
+12,4, 0,0, 1
+12,3, 0,0, 1
+12,2, 0,0, 1
+12,1, 0,0, 1
+
+[Simul Lifebar];四人同屏对战时的血条参数，参数和上面相同
+;Player 1
+p1.pos    = 590,40
+p1.bg0.anim = 20
+p1.bg0.offset = -6,6
+p1.bg1.spr = 11,0
+p1.mid.anim = 12
+p1.mid.offset = -6,6
+p1.mid.scale = 1,0.5
+p1.front.spr = 13,0
+p1.front.offset = -6,6
+p1.front.scale = 1,0.5
+p1.range.x  = -6,-433
+;Player 2
+p2.pos    = 690,40
+p2.bg0.anim = 20
+p2.bg0.offset = 6,6
+p2.bg0.facing = -1
+p2.bg1.spr = 11,0
+p2.bg1.facing = -1
+p2.mid.anim = 12
+p2.mid.offset = 6,6
+p2.mid.facing = -1
+p2.mid.scale = 1,0.5
+p2.front.spr = 13,0
+p2.front.offset = 6,6
+p2.front.facing = -1
+p2.front.scale = 1,0.5
+p2.range.x = 6,433
+;Player 3
+p3.pos    = 590,49
+p3.mid.anim = 12
+p3.mid.offset = -6,6
+p3.mid.scale = 1,0.5
+p3.front.spr = 13,0
+p3.front.offset = -6,6
+p3.front.scale = 1,0.5
+p3.range.x  = -6,-433
+;Player 4
+p4.pos    = 690,49
+p4.mid.spr = 12,0
+p4.mid.offset = 6,6
+p4.mid.facing = -1
+p4.mid.scale = 1,0.5
+p4.front.spr = 13,0
+p4.front.offset = 6,6
+p4.front.facing = -1
+p4.front.scale = 1,0.5
+p4.range.x = 6,433
+
+[Begin Action 20] ;Darkened lifebar background (simul)
+20,0, 0,0, 1, , AS224D32
+
+[Turns Lifebar];车轮战时的血条参数
+;Player 1
+p1.pos    = 590,40
+p1.bg0.anim = 10
+p1.bg0.offset = -6,6
+p1.bg1.spr = 11,0
+p1.mid.anim = 12
+p1.mid.offset = -6,6
+p1.front.spr = 13,0
+p1.front.offset = -6,6
+p1.range.x  = -6,-433
+;Player 2
+p2.pos    = 690,40
+p2.bg0.anim = 10
+p2.bg0.offset = 6,6
+p2.bg0.facing = -1
+p2.bg1.spr = 11,0
+p2.bg1.facing = -1
+p2.mid.anim = 12
+p2.mid.offset = 6,6
+p2.mid.facing = -1
+p2.front.spr = 13,0
+p2.front.offset = 6,6
+p2.front.facing = -1
+p2.range.x = 6,433
+
+;-----------------------------------------------------------
+[Powerbar];气条/能量槽
+;Player 1的气条参数
+p1.pos    = 590,70	;气条的位置
+p1.bg0.anim = 40	;气条的暗色背景动画编号
+p1.bg0.offset = -6,4	;气条的偏移量
+p1.bg1.spr = 41,0	;空气条的图片编号
+;p1.mid.spr = 42,0	;扣气时的气条图片编号，一般不用填
+p1.front.anim = 43	;气条的动画编号
+p1.front.offset = -6,4	;气条的偏移量
+p1.range.x = -6,-245	;气条拉伸至左右的相对坐标
+p1.counter.offset = -256,15	;气条数字的文字位置
+p1.counter.font = 4,0, 0, 242,242,255	;气条数字的字体参数
+
+;Player 2的气条参数，同p1
+p2.pos    = 690,70
+p2.bg0.anim = 40
+p2.bg0.offset = 6,4
+p2.bg0.facing = -1
+p2.bg1.spr = 41,0
+p2.bg1.facing = -1
+;p2.mid.spr = 42,0
+;p2.mid.facing = -1
+p2.front.anim = 43
+p2.front.offset = 6,4
+p2.front.facing = -1
+p2.range.x  = 6,245
+p2.counter.offset = 259,15
+p2.counter.font = 4,0, 0, 242,242,255
+
+; --level sounds---;气条每攒够一气时播放的音效
+level1.snd = 21,0
+level2.snd = 21,0
+level3.snd = 21,0
+
+[Begin Action 40] ;气条的暗色背景
+40,0, 0,0, 1, , AS224D32
+
+[Begin Action 43] ;Flashing powerbar
+43,0, 0,0, 15
+43,1, 0,0, 1
+43,2, 0,0, 1
+43,3, 0,0, 1
+43,4, 0,0, 1
+43,5, 0,0, 1
+43,6, 0,0, 1
+43,7, 0,0, 1
+43,8, 0,0, 1
+43,9, 0,0, 1
+43,10, 0,0, 1
+43,11, 0,0, 1
+43,12, 0,0, 1
+43,13, 0,0, 1
+43,14, 0,0, 1
+43,15, 0,0, 1
+43,16, 0,0, 1
+43,17, 0,0, 1
+
+
+;-----------------------------------------------------------
+[Face];小头像
+;Player 1的小头像参数
+p1.pos    = 20,20	;p1的小头像参数
+p1.bg0.spr = 50,0	;p1的小头像边框图片
+p1.bg1.anim = 51	;p1小头像背景动画编号
+p1.face.spr = 9000,0	;p1使用的小头像编号
+p1.face.facing = 1	;p1的小头像朝向
+p1.face.offset = 0,0	;p1的小头像偏移量
+;Player 2的小头像参数，参数通过p1
+p2.pos    = 1260,20
+p2.bg0.spr = 50,0
+p2.bg0.facing = -1
+p2.bg1.anim = 51
+p2.bg1.facing = -1
+p2.face.spr = 9000,0
+p2.face.facing = -1
+p2.face.offset = 0,0
+
+[Begin Action 51] ;Darkened face background 
+51,0, 0,0, 1, , AS208D48
+
+[Simul Face];4人同屏战斗时的小头像参数
+;Player 1
+p1.pos    = 20,20
+p1.bg0.spr = 50,0
+p1.bg1.anim = 51
+p1.face.spr = 9000,0
+p1.face.facing = 1
+;Player 2
+p2.pos    = 1260,20
+p2.bg0.spr = 50,0
+p2.bg0.facing = -1
+p2.bg1.anim = 51
+p2.bg1.facing = -1
+p2.face.spr = 9000,0
+p2.face.facing = -1
+;Player 3
+p3.pos    = 144,80
+p3.bg0.spr = 70,0
+p3.bg1.anim = 71
+p3.face.spr = 9000,0
+p3.face.scale = 0.4,0.4
+p3.face.facing = 1
+;Player 4
+p4.pos    = 1136,80
+p4.bg0.spr = 70,0
+p4.bg0.facing = -1
+p4.bg1.anim = 71
+p4.bg1.facing = -1
+p4.face.spr = 9000,0
+p4.face.scale = 0.4,0.4
+p4.face.facing = -1
+
+[Turns Face];车轮战时玩家头像参数
+;Player 1
+p1.pos    = 20,20
+p1.bg0.spr = 50,0
+p1.bg1.anim = 51
+p1.face.spr = 9000,0
+p1.face.facing = 1
+;Player 1's teammates
+p1.teammate.pos = 144,80
+p1.teammate.spacing = 50,0
+p1.teammate.bg0.spr = 70,0
+p1.teammate.bg1.anim = 71
+p1.teammate.ko.anim = 72
+p1.teammate.face.spr = 9000,0
+p1.teammate.face.scale = 0.4,0.4
+p1.teammate.face.facing = 1
+;Player 2
+p2.pos    = 1260,20
+p2.bg0.spr = 50,0
+p2.bg0.facing = -1
+p2.bg1.anim = 51
+p2.bg1.facing = -1
+p2.face.spr = 9000,0
+p2.face.facing = -1
+;Player 2's teammates
+p2.teammate.pos = 1136,80
+p2.teammate.spacing = -50,0
+p2.teammate.bg0.spr = 70,0
+p2.teammate.bg0.facing = -1
+p2.teammate.bg1.anim = 71
+p2.teammate.bg1.facing = -1
+p2.teammate.ko.anim = 72
+p2.teammate.ko.facing = -1
+p2.teammate.face.spr = 9000,0
+p2.teammate.face.scale = 0.4,0.4
+p2.teammate.face.facing = -1
+
+[Begin Action 71] ;Darkened small face background 
+71,0, 0,0, 1, , AS208D48
+
+[Begin Action 72] ;KO overlay for small face
+72,0, 0,0, 1, , AS192D64
+
+;-----------------------------------------------------------
+[Name];显示名字
+p1.pos = 142,35		;p1的名字坐标
+;p1.bg. =		;p1的名字图片
+p1.name.font = 3,3, 1	;p1的名字字体
+;p2.bg. =
+p2.pos = 1138,35
+p2.name.font = 3,1, -1
+
+[Simul Name];4人同屏对战时的名字参数
+p1.pos = 142,35
+p1.name.font = 3,3, 1
+p2.pos = 1138,35
+p2.name.font = 3,1, -1
+p3.pos = 200,85
+p3.name.font = 3,3, 1
+p3.name.scale = 0.5,1
+p4.pos = 1080,85
+p4.name.font = 3,1, -1
+p4.name.scale = 0.5,1
+
+[Turns Name];车轮战时的名字参数
+p1.pos = 142,35
+;p1.bg. =
+p1.name.font = 3,3, 1
+;p2.bg. =
+p2.pos = 1138,35
+p2.name.font = 3,1, -1
+
+;-----------------------------------------------------------
+[Time];时间
+pos = 642,84	;时间显示的位置
+;bg.spr = 	;时间的背景图片
+;数字显示
+counter.offset = 0,0	;数字的显示偏移量
+counter.font = 2,0, 0, 255,255,242	;数字的字体
+framespercount = 60	;每跳一下数字的时间间隔，单位是帧，60帧为1秒
+
+;-----------------------------------------------------------
+[Combo];连段
+team1.pos = 30,260        ;p1连段显示的坐标
+team1.start.x = -240      ;连击数字起始的位置
+team1.counter.font = 2,3,1;连击数字的字体
+team1.counter.shake = 1   ;设为1时，数字变化时会有晃动效果
+team1.text.text = "COMBO" ;可以用%i表示连击数, 比如 "%i Hit!"
+team1.text.font = 1,4,1	  ;连击文字的字体
+team1.text.offset = 12,0   ;连击文字的偏移量
+team1.displaytime = 90    ;显示连击数的持续时间
+;p2连段参数，同1p
+team2.pos = 1250,260      ;Coords to show
+team2.start.x = 1520      ;Starting x-coords
+team2.counter.font = 2,1,-1
+team2.counter.shake = 1   ;Set to 1 to shake count on hit
+team2.text.text = "COMBO" ;You can use %i to show count in the text, eg "%i Hit!"
+team2.text.font = 1,4,-1
+team2.text.offset = 12,0  ;Offset of text
+team2.displaytime = 90    ;Time to show text
+
+;-----------------------------------------------------------
+[Round];局数
+match.wins = 2              ;结束一场战斗必须要赢的局数
+match.maxdrawgames = 1      ;允许平局的最多次数 (-1为无限次)
+start.waittime = 30         ;人物开始开场动画前的等待时间
+
+;所有参数的默认坐标
+pos = 0,0
+
+;ROUND X
+round.time = 0              ;显示round的起始时间
+round.default.offset = 640, 320	;显示round的偏移量
+;文字形式的round可以包含%i来表示局数，也可以使用"round.default.anim"来用动画表现
+round.default.font = 1,0,0	;round的默认字体
+round.default.text = "Round %i"	;默认文字显示
+round.default.displaytime = 60	;显示round的持续时间
+round.default.scale = 1,1	;round的xy缩放比例
+;每一局的报幕声音 (选填，最多可以到round 9)
+round1.snd = 0,1
+round2.snd = 0,2
+round3.snd = 0,3
+round.sndtime = 0           ;播放声音的起始时间
+; Components to show for each round (optional, specify up to round 9)
+; Uncomment to use
+;round1.offset = 160, 100
+;round1.anim = 
+
+;FIGHT，参数同round
+fight.time = 0              
+fight.offset = 640, 300     ;Component for FIGHT display
+fight.anim = 80             ;.
+fight.snd = 1,0             ;Sound to play
+fight.sndtime = 0           ;Time to play sound
+
+ctrl.time = 30              ;播放"Fight"后经过多长时间可以进行操作
+
+;KO，参数同round
+KO.time    = 0              ;Time to show KO component
+KO.offset  = 640, 300       ;Component for KO display
+KO.anim    = 200            ;.
+KO.snd     = 2,0            ;Sound to play for KO announcement
+; Double KO，参数同round
+DKO.offset = 640, 320
+DKO.font   = 1,5
+DKO.text   = "Double K.O."
+DKO.displaytime = 60
+DKO.snd    = 2,1
+; Time Over，参数同round
+TO.offset  = 640, 320
+TO.font    = 1,5
+TO.text    = "Time Over"
+TO.displaytime = 60
+TO.snd     = 2,2
+KO.sndtime = 0             ;播放KO, DKO and TO的起始时间
+slow.time  = 60            ;KO之后慢放动作的持续时间
+over.waittime = 45         ;KO之后玩家还能操作的时间
+over.hittime = 10          ;KO之后玩家还能造成伤害的时间，主要用于Double KO
+over.wintime = 45          ;角色播放胜利动作之前需要等待的时间
+over.time = 210            ;KO之后到该局结束前的等待时间
+
+win.time = 60		;显示win信息之前需要等待的时间
+;胜利文字，参数同round
+win.offset = 640, 320
+win.font = 1,0
+win.text = "%s Wins"	;%s为角色名，即人物的displayname
+win.displaytime = 540
+; 2-player win text
+win2.offset = 640, 320
+win2.font = 1,0
+win2.text = "%s and %s Win"
+win2.displaytime = 540
+;平局文字
+draw.offset = 640, 320
+draw.font = 1,0
+draw.text = "Draw Game"
+draw.displaytime = 540
+
+;"Fight!"动画
+[Begin Action 80]
+80,0, 0,0, 8, , AS128D128, 4,4, 180
+Interpolate Scale
+Interpolate Angle
+Interpolate Blend
+80,0, 0,0, 40, , AS256D0
+80,0, 0,0, 4, , AS192D63
+Interpolate Blend
+80,0, 0,0, 1, , AS32D223
+
+;"K.O."动画
+[Begin Action 200]
+-1,-1, 0,0, 5
+200,0, 0,0, 1, , AS255D255
+200,0, 0,0, 1, , AS255D224
+200,0, 0,0, 1, , AS255D192
+200,0, 0,0, 1, , AS255D160
+200,0, 0,0, 1, , AS255D128
+200,0, 0,0, 120
+200,0, 0,0, 1, , AS255D64
+200,0, 0,0, 1, , AS255D128
+200,0, 0,0, 1, , AS255D192
+200,0, 0,0, 1, , AS255D255
+200,0, 0,0, 1, , AS192D255
+200,0, 0,0, 1, , AS128D255
+200,0, 0,0, 1, , AS64D255
+
+;-----------------------------------------------------------
+[WinIcon];胜利的标志
+p1.pos = 584,30		;胜利标志坐标
+p2.pos = 696,30
+p1.bg0.spr = 120,0	;胜利标志图片编号
+p2.bg0.spr = 120,0
+p1.iconoffset = -24,0	;每个胜利标志的间隔xy坐标
+p2.iconoffset = 24,0
+; Counter text font and offset for representing wins
+p1.counter.offset = 0,5
+p1.counter.font = 4,0,0, 230,255,242
+p2.counter.offset = 0,5
+p2.counter.font = 4,0,0, 255,242,242
+;普通胜利的图片编号
+p1.n.spr = 100,0
+p2.n.spr = 100,0
+;特殊胜利的图片编号
+p1.s.spr = 101,0
+p2.s.spr = 101,0
+;必杀胜利的图片编号
+p1.h.spr = 102,0
+p2.h.spr = 102,0
+;投技胜利的图片编号
+p1.throw.spr = 103,0
+p2.throw.spr = 103,0
+;微笑胜利？win by cheese
+p1.c.spr = 104,0
+p2.c.spr = 104,0
+;时间到胜利的图片编号
+p1.t.spr = 105,0
+p2.t.spr = 105,0
+;对方自杀胜利的图片编号
+p1.suicide.spr = 106,0
+p2.suicide.spr = 106,0
+;被自己队友杀死胜利的图片编号
+p1.teammate.spr = 107,0
+p2.teammate.spr = 107,0
+;完胜，优先级高于其他胜利方式
+p1.perfect.spr = 110,0
+p2.perfect.spr = 110,0
+;显示胜利标志的上限数
+useiconupto = 4
+
+
+;-----------------------------------------------------------
+; How to customize
+;-----------------------------------------------------------
+; First of all, set filenames under [Files].
+; 
+; Next, you can customize each component of the fight screen.
+; A component can be anything from a piece of the lifebar,
+; to the text that signals a K.O.
+;
+; Each component starts with its name, followed by a period,
+; and then the names of its elements. For example, a
+; component named "bg" with an element of "anim" looks
+; like "bg.anim".
+;
+; There are several main element types:
+;   1. anim (animation)
+;   2. spr  (sprite)
+;   3. font (text)
+;   4. snd  (sound)
+; 
+; 1. anim
+;    Format: anim = actionno
+;    actionno is the number of the action to use. You must
+;    specify a valid action that is defined within this file.
+;    The sprites for the animation come from the file given
+;    for the "sff" parameter in the [Files] group below.
+;    You can define your animation actions anywhere in this
+;    file, as long as it does not come in the middle of a
+;    group (an example of a group is the block of text
+;    starting with [Files], and ending on the next group
+;    [Lifebar]).
+;    For example, to use action 5 for the p1.bg0 component:
+;      p1.bg0.anim = 5
+;
+; 2. spr
+;    Format: spr = spritegrp, spriteno
+;    This is the identifier pair for the sprite you to
+;    display.
+;    For example, to show sprite 103,0 for a component named
+;    p1.throw:
+;      p1.throw.spr = 103,0
+;
+; 3. font
+;    Format: font = fontno, fontbank, alignmnt, R, G, B
+;            text = text
+;    This lets you set the font (and optionally the content
+;    text). fontno is the number of the font defined under
+;    [Files]. For instance, for the line "font2 = font/num1.fnt",
+;    the fontno is 2.
+;    fontbank is the color bank of the font to use. Refer to
+;    the font for what color banks it has.
+;    alignmt is a number representing the text alignment.
+;    1 is left, 0 means center, and -1 is for right-alignment.
+;    R, G, B are the color adjustment values for the font.
+;    RGB values default to 256,256,256 (no color adjustment).
+;    All font values are optional.  If fontno is omitted, no
+;    text will be drawn.
+;
+;    The "text" element should accompany the "font" element
+;    wherever necessary. The following example will display
+;    "FIGHT!" using font 1, bank 1, with center-alignment.
+;      fight.font = 1,1, 0
+;      fight.text = FIGHT!
+;
+; 4. snd
+;    Format: snd = sndgrp, sndno
+;    This is the identifier pair for the sound effect to
+;    play. The .snd file that the sound is played from
+;    is given in the "snd" parameter in the [Files] group.
+;    This plays sound 21,0 for the "level1" component.
+;      level1.snd = 21,0
+; 
+; Take note that the anim, spr and font element types are
+; mutually exclusive; you can only use one of them per
+; component.
+;
+; The types of elements supported vary with the component.
+; Usually the anim, spr and font elements are interchangeable
+; for a component. However, in some cases only one element
+; type may be used. An example of this is found under [Combo]:
+;   counter.font = 2,4  ;Font for combo counter
+; You cannot use an animation or a sprite to represent a
+; numeric counter, so it only makes sense to define a font
+; for use.
+;
+; There are other element types that do nothing on their
+; own. They can be used with display element types
+; (spr, anim and font) to gain more control. These
+; have no meaning when used with the snd element.
+;   5.  offset
+;   6.  displaytime
+;   7.  facing
+;   8.  vfacing
+;   9.  layerno
+;   10. scale
+;
+; 5. offset
+;   Format: offset = x, y
+;   Displaces the display element horizontally by x pixels,
+;   and vertically by y pixels.
+;   If this element is omitted, the offset is assumed to
+;   be 0,0.
+;
+; 6. displaytime
+;   Format: displaytime = time_in_ticks
+;   This element defines the time to display the component.
+;   If omitted, the default display time varies with element
+;   type. For spr and font elements, the default displaytime
+;   is 1. For anim, it is the looptime of the animation.
+;   This example displays the text "FIGHT!" for 45 game
+;   ticks:
+;     fight.font = 1,1, 0
+;     fight.text = FIGHT!
+;     fight.displaytime = 45
+;
+; 7. facing
+;   Format: facing = dir
+;   Sets the horizontal flipping of the display element.
+;   1 means no flipping, and -1 means flip horizontally.
+;   Does not affect "font" elements. Defaults to 1 if
+;   omitted.
+;
+; 8. vfacing
+;   Format: vfacing = dir
+;   Sets the vertical flipping of the display element.
+;   1 means no flipping, and -1 means flip vertically.
+;   Does not affect "font" elements. Defaults to 1 if
+;   omitted.
+;
+; 9. layerno
+;   Format: layerno = no
+;   This element lets you set the layer to which the
+;   display element will be drawn on. 0 is in front of
+;   the background, but behind the players. 1 is in
+;   front of the players, but behind the foreground.
+;   2 is in front of the foreground. The default is 0
+;   in most cases.
+;   An example of where this might be useful is when
+;   you want to have the life or power bars appear
+;   on top. In that case, set all the components to
+;   have layerno = 2.
+;
+; 10. scale
+;   Format: scale = xscale, yscale
+;   Scales the display element by a horizontal scale
+;   factor of xscale, and vertically by a factor of
+;   yscale. Defaults to 1,1 if omitted.
+;   Currently does not affect "font" elements.
+;
+; 11. angle
+;   Format: angle = degrees
+;   Draws the element rotated by the specified angle.
+;
+; Some components have additional elements specific
+; to themselves.

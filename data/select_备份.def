@@ -1,0 +1,61 @@
+[Characters]
+batman-kofa\batman-kofa.def
+Brainiac\Brainiac.def
+Brainiac (Ledernieraztlan + 1% + MugenJLN)\BRAINIAC\BRAINIAC.def
+Brainiac (Ledernieraztlan + 1% + MugenJLN) (1)\BRAINIAC\BRAINIAC.def
+Brainiac (Ledernieraztlan + Unknown)\brainiac\brainiac.def
+Brainiac (Ledernieraztlan Old)\Brainiac v0.1a\Brainiac.def
+CVG_Flash\CVG_Flash.def
+DARKSEIDspiderbat\DARKSEID\DARKSEID.def
+Dragula\Dragula.def
+FlashNew52\FlashNew52.def
+gaslight batman\gaslight batman.def
+Ghost Spider\Spider-Gwen\Spider-Gwen.def
+GLHal\GLHal.def
+GLHal (1)\GLHal\GLHal.def
+GLhal2\GLHal2.def
+GreenLanternMVC\GreenLanternMVC.def
+GreenLanternMVC(No auto shield)\GreenLanternMVC\GreenLanternMVC.def
+hal parallax\hal PARALLAX.def
+HalJordan_v21\HalJordan.def
+HalJordan_v21 (1)\HalJordan.def
+HalJordan_v21 (2)\HalJordan.def
+MvC_Harley_Quinn1\MvC_Harley_Quinn1.def
+Nightmare Batman\Nightmare Batman.def
+nightwing\nightwing.def
+Nightwing (Mu & McCready + comorep MvC)\Nightwing MvC\Nightwing MvC.def
+Nightwing (O Illusionista + allthis10)\!Nightwing-o\!Nightwing-o.def
+Nightwing Mistah Jorge\nightwing\nightwing.def
+Nightwing-o\!Nightwing-o.def
+Parallax\Parallax.def
+powerring\powerring.def
+Symbiote Thanos\Symbiote Thanos.def
+The Flash\the flash.def
+TheFlashnew52\TheFlashnew52.def
+TheFlashUpdate2\TheFlash\TheFlash.def
+TheSpider2023\!TheSpider\!TheSpider.DEF
+The_Flash JQGAMING\Flash jlu\Flash jlu.def
+Zoom upd\Zoom\Zoom.def
+Zoom upd\Zoom\backup\profzoom.def
+Zoom upd\Zoom\backup\10.02.2023_5.43.36__\ReverseFlash.def
+zooms\zooms.def
+[ExtraStages]
+stages\01Darui beach.def
+stages\01guidao2.def
+stages\02kfm.def
+stages\02stage0-720.def
+stages\Digimon_Arena.def
+stages\Digimon_Cave.def
+stages\Digimon_Forest.def
+stages\Digimon_Ice.def
+stages\Digimon_Library.def
+stages\Digimon_Vulcano.def
+stages\Avallon\Avallon.def
+stages\MBTL_Magicians_Night_EX\MBTL_Magicians_Night_EX.def
+stages\Monster\Monster.def
+stages\Nightmare\Nightmare.def
+stages\Sky night\sky_battle_hires.def
+stages\¶¬Ö®Óñ×ùFGO_Winter throne\FGO_Winter throne.def
+[Options]
+arcade.maxmatches = 6,1,1,0,0,0,0,0,0,0
+team.maxmatches = 4,1,1,0,0,0,0,0,0,0
