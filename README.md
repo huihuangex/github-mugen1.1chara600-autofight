@@ -1,6 +1,9 @@
 # mugen1.1chara600-autofight
 测试完成
 
+chars用来放角色
+stages用来放场景
+
 多人对战
 观看模式用这个
 3v3.exe
