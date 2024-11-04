@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.7: http://docutils.sourceforge.net/" />
+<title>Frequently asked questions (FAQ) list for M.U.G.E.N</title>
+<style type="text/css">
+
+/*
+M.U.G.E.N documentation stylesheet.
+
+
+Modified from voidspace.css.
+
+:Authors: Ian Bicking, Michael Foord
+:Contact: fuzzyman@voidspace.org.uk
+:Date: 2005/08/26 
+:Version: 0.1.0
+:Copyright: This stylesheet has been placed in the public domain.
+
+Stylesheet for Docutils.
+Based on ``blue_box.css`` by Ian Bicking
+and ``html4css1.css`` revision 1.46.
+*/
+
+@import url(html4css1.css);
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+em, i {
+  font-family: Times New Roman, Times, serif;
+}
+
+a {
+  color: #5577EE;
+  text-decoration: none;
+}
+
+a.reference.internal {
+  font-size: 80%;
+}
+
+a.toc-backref {
+  color: black;
+  text-decoration: none;
+}
+
+a.toc-backref:hover {
+  background-color: inherit;
+}
+
+a:hover {
+  background-color: #cccccc;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+div.attention, div.caution, div.danger, div.error, div.hint,
+div.important, div.note, div.tip, div.warning {
+  background-color: #cccccc;
+  padding: 3px;
+  width: 80%;
+}
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title  {
+  text-align: center;
+  background-color: #999999;
+  display: block;
+  margin: 0;
+}
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: #cc0000;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #999999;
+  display: block;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  border: thin solid black;
+  /* This makes the borders rounded on Mozilla, which pleases me */
+  -moz-border-radius: 8px;
+  padding: 4px;
+}
+
+h1 {
+  background-color: #445BAA;
+  color: #ffffff;
+  border: medium solid black;
+}
+
+h1 a.toc-backref, h2 a.toc-backref { 
+  color: #ffffff;
+}
+
+h2 {
+  background-color: #667788;
+  color: #ffffff;
+  border: thin solid black;
+}
+
+h3, h4, h5, h6 {
+  background-color: #cccccc;
+  color: #000000;
+}
+
+h3 a.toc-backref, h4 a.toc-backref, h5 a.toc-backref, 
+h6 a.toc-backref { 
+  color: #000000;
+}
+
+h1.title {
+  text-align: center;
+  background-color: #445BAA;
+  color: #eeeeee;
+  border: thick solid black;
+  -moz-border-radius: 20px;
+}
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+table.footnote {
+  padding-left: 0.5ex;
+}
+
+table.citation {
+  padding-left: 0.5ex
+}
+
+pre.literal-block, pre.doctest-block {
+  border: thin black solid;
+  padding: 5px;
+}
+
+.image img { border-style : solid;
+            border-width : 2px;
+}
+
+h1 tt, h2 tt, h3 tt, h4 tt, h5 tt, h6 tt {
+  font-size: 100%;
+}
+
+code, tt {
+  color: #000066;
+  font-size: 120%;
+}
+
+</style>
+</head>
+<body>
+<div class="document" id="frequently-asked-questions-faq-list-for-m-u-g-e-n">
+<h1 class="title">Frequently asked questions (FAQ) list for M.U.G.E.N</h1>
+
+<div class="section" id="general">
+<h1>General</h1>
+<p>Q. Where's the latest version of M.U.G.E.N?
+---
+<a class="reference external" href="http://elecbyte.com/mugen">http://elecbyte.com/mugen</a></p>
+<p>Q. How do I add characters and stages?
+---
+Unzip your character into a new folder under the chars/ folder. Note the
+name of the character's .def file.</p>
+<p>Using a text editor such as Notepad, browse to the data/ folder in your
+M.U.G.E.N installation, and then open select.def. In the [Characters]
+group at the top, add a line that looks like:</p>
+<blockquote>
+playerdir/player.def, stages/stage.def</blockquote>
+<p>playerdir should be the name of the folder you placed the character files
+in, and player.def should be the player's .def file. stage.def should be
+the name of the player's stage. If you do not specify a stage, it will be
+randomly chosen in the game. The comments in select.def have additional
+information.</p>
+<p>If your player's .def file name and folder name are the same (for instance,
+the folder is named kiwi/ and the .def file is kiwi.def), then you can just
+enter &quot;kiwi&quot; instead of &quot;kiwi/kiwi.def&quot; (without the quotes).</p>
+<p>Q. How do I increase the number of slots in the character select screen?
+---</p>
+<p>Using a text editor such as Notepad, browse to the data folder and open
+mugen.cfg.  Under the [Options] group, search for a line:</p>
+<blockquote>
+motif = data/mugen1/system.def</blockquote>
+<p>and change it to:</p>
+<blockquote>
+motif = data/big/system.def</blockquote>
+<p>If you need more space, open the corresponding system.def file with
+a text editor.  Search for the [Select Info] group.  Increase the value
+of &quot;rows&quot; and &quot;columns&quot; to create more slots for additional characters.</p>
+<p>You may need to adjust the pos parameter to place the newly-sized
+boxes correctly on the screen.</p>
+<p>Q. Is M.U.G.E.N free?
+---
+Yes, M.U.G.E.N is free for personal use.  For other uses, please contact us.
+The full license text is in our readme file.
+<a class="reference external" href="http://elecbyte.com/mugendocs/readme.txt">http://elecbyte.com/mugendocs/readme.txt</a></p>
+<p>Q. Is M.U.G.E.N legal?
+---
+Yes, the engine is legal.
+But you may be wondering about all those M.U.G.E.N characters your fellow
+users made from other games or cartoons.  That's been a subject of
+debate in M.U.G.E.N communities for as long as the engine has existed.
+As far as we can tell, the answer for that lies between &quot;no&quot; and
+&quot;maybe&quot;, and given that we advise you to use your own judgment.</p>
+<p>Personally, we'd like to see more original content being made for M.U.G.E.N.</p>
+<p>Q. Can I give away or sell a game I make with M.U.G.E.N?
+---
+We don't allow redistribution of the M.U.G.E.N engine without our permission.
+This means that complete game distributions, whether free or not, are not
+permitted by our license.</p>
+<p>However, we don't place any restrictions on the content you create, so you
+can distribute your game <em>without</em> the M.U.G.E.N engine.  Instruct your users
+to get the latest version of M.U.G.E.N from our site (elecbyte.com) and then
+unzip your game into their M.U.G.E.N installation.</p>
+<p>Of course, if you use any third party content in your game, please remember
+to first get permission from the rightful owners.</p>
+<p>Q. Can I distribute content based on KFM or other sample content included with M.U.G.E.N?
+---
+All the sample content licensed under the Creative Commons
+Noncommercial License.  Attribution is optional.</p>
+<p>Basically, it means you don't need our permission to build upon or
+use parts of any of that content for non-commercial purposes.  In
+fact, we encourage you to use the sample content as a starting point
+for your projects and replacing the graphics, sounds and behaviors.</p>
+<p>If you've replaced just about all the graphics and sounds while
+working off our sample content, we don't consider your content to
+be derivative.  That means we don't put any restrictions on your
+content at that point.</p>
+<p>You are free to post videos and screenshots that include our sample
+content.</p>
+<p>You can find more info about the CC License here:
+<a class="reference external" href="http://creativecommons.org/licenses/by-nc/3.0/">http://creativecommons.org/licenses/by-nc/3.0/</a></p>
+<p>Q. Where can I learn more?
+---
+Read the documentation, browse our wiki, or look around our forum.</p>
+<p><a class="reference external" href="http://elecbyte.com/mugendocs/mugen.html">http://elecbyte.com/mugendocs/mugen.html</a>
+<a class="reference external" href="http://elecbyte.com/wiki">http://elecbyte.com/wiki</a>
+<a class="reference external" href="http://elecbyte.com/forum">http://elecbyte.com/forum</a></p>
+<p>Q. What does M.U.G.E.N stand for?
+---
+We really don't remember what it stands for.
+In the spirit of how M.U.G.E.N works, you are free to customize your own
+words for it.</p>
+<p>Q. Where can I download Winmugen, older MUGEN, etc.?
+---
+...</p>
+</div>
+<div class="section" id="features">
+<h1>Features</h1>
+<p>Q. What features can I expect in the near future?
+---
+We are considering the following for 1.1:
+- Updated graphics engine.
+- Minor additions to CNS.</p>
+<p>Q. What features can I expect in the long term?
+---
+We haven't started work on this yet, but we'd like to overhaul the
+architecture with a focus on a increasing the flexibility of scripting
+character behavior.</p>
+<p>Q. Will you add tag battle?
+---
+We're working on it.</p>
+<p>Q. Will you add netplay?
+---
+Not in the near future.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h1>Troubleshooting</h1>
+<p>Q. I edited system.def but none of the changes take effect. Why?
+---
+The default motif in M.U.G.E.N 1.0 is the &quot;mugen1&quot; motif.
+So you need to edit the system.def file in data/mugen1/ instead of
+the one in the data/ folder.</p>
+<p>Q. How do I adjust the volume of characters and music?
+---
+...</p>
+<p>Q. I put a winamp dll into the plugins folder but it doesn't work. Why?
+---
+...</p>
+<p>Q. The motif (&quot;screenpack&quot;) I downloaded looks wrong. How come?
+---
+Some motifs are made for the &quot;Doubleres = 4&quot; (a.k.a. &quot;D4&quot;) setting in the
+old M.U.G.E.N.  Others are made for unofficial hacks of the engine.  We
+obviously don't provide support for those, but with some editing you can
+get them to work with the current release of M.U.G.E.N.</p>
+<p>Q. Why is the screen cut off at the top/bottom?
+---
+M.U.G.E.N 1.0 defaults to a widescreen aspect.  This makes the screen
+look cramped for some people.  You can change back to a normal aspect
+by editing the [Config] section in mugen.cfg:</p>
+<p>GameWidth = 1280   -&gt; change this to 640
+GameHeight = 720   -&gt; change this to 480</p>
+<p>More stage aspect options will be added in 1.1.</p>
+<p>Q. When I run MUGEN I get an error that the application configuration
+is incorrect. What can I do?</p>
+<p>&quot;This application has failed to start because the application
+configuration is incorrect. Reinstalling the application may fix this
+problem&quot;</p>
+<p>Download and install the Microsoft Visual C++ 2008 SP1 Redistributable
+to see if it fixes your problem. Post a bug report in our forum if it
+doesn't.
+<a class="reference external" href="http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2">http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2</a></p>
+<p>Q. M.U.G.E.N runs slowly even though I have the latest video card. Why?
+---
+The most common slowdown issue is due to the video renderer.
+M.U.G.E.N 1.0 has an outdated renderer that's limited by the speed of
+your CPU, not graphics card.  You can see slowdown when there's a lot
+of effects on screen.  We're working on a solution that will take
+advantage of your graphics card.</p>
+<p>Other things you can do to speed up M.U.G.E.N:</p>
+<dl class="docutils">
+<dt>Close other applications</dt>
+<dd>Closing other CPU or memory-intensive applications may speed up
+M.U.G.E.N.</dd>
+<dt>Use the most efficient video mode</dt>
+<dd>Running in a window can be slow on some systens. Try running in
+fullscreen. Set FullScreen = 1 in mugen.cfg.</dd>
+<dt>Set a smaller resolution</dt>
+<dd>Try 640x480 or 640x360 if MUGEN is running too slowly in HD
+resolutions.</dd>
+<dt>Turn off shadows</dt>
+<dd>You can turn shadows off to speed up drawing. Look in
+data/mugen.cfg and set the &quot;DrawShadows&quot; option under [Config]
+to 0.</dd>
+<dt>Use frameskip</dt>
+<dd>Auto-frameskip is enabled by default. The game will not draw
+some frames in case the computer is not fast enough, and this
+helps maintain a constant game speed.
+If you'd like to run at a constant framerate, you can hit Ctrl-F
+repeatedly to adjust the frameskip. It will switch from &quot;auto&quot;
+to &quot;skip none&quot; to &quot;skip 1&quot; to &quot;skip 2&quot; and then back to &quot;auto&quot;.
+This works only when you are in the fight screen.</dd>
+<dt>Free up memory</dt>
+<dd>Memory may be swapped to the hard disk when you run low, and
+this will severely impact performance. See the next section
+on how to reduce memory usage.</dd>
+<dt>Disable precaching</dt>
+<dd>If you find the game slows down too much when loading in the
+background, you can disable precaching. This will increase
+load times, however. Under [Misc], set precache = 0.</dd>
+</dl>
+<p>Sometimes slowdown is caused by excessive memory usage.  If your
+computer has less than 3GB of RAM, you can try these:</p>
+<dl class="docutils">
+<dt>Reduce the player cache</dt>
+<dd>M.U.G.E.N will try to keep players in memory in order to reduce
+loading times. You might want to reduce the number of players
+that are kept in memory at any one time.
+Open up data/mugen.cfg and look under the [Misc] section.
+Change PlayerCache to a smaller number. 0 will save you the
+most memory.</dd>
+<dt>Reduce the number of characters</dt>
+<dd>Having a large number of characters can consume a substantial
+amount of memory. You can split your character roster up between
+multiple motifs. See &quot;Using Motifs&quot; in the readme file.</dd>
+<dt>Disable buffered read</dt>
+<dd>You can save memory while loading characters by turning this
+option off. It is found under the [Misc] section, and called
+&quot;BufferedRead&quot;. Loading times will increase as a result.</dd>
+<dt>Reduce effects and limits</dt>
+<dd>Set the options under [Config] to a smaller numbers (see mugen.cfg
+for descriptions). Reducing HelperMax gives the most savings.</dd>
+<dt>Enable system file unload</dt>
+<dd>Set UnloadSystem under [Misc] to 1.</dd>
+<dt>Optimize your sprite files</dt>
+<dd>When you generate a sprite file, enable settings such as
+sprite.autocrop and sprite.detectduplicates.  If your sprites
+use 32 colors or less consider using lz5 compression (see
+work/kfm/kfm-sff-optimized.def).</dd>
+</dl>
+<p>Q. My problem isn't listed in this FAQ. Where can I get help?
+---
+Post your questions to our community forum.
+<a class="reference external" href="http://elecbyte.com/forum">http://elecbyte.com/forum</a></p>
+</div>
+<div class="section" id="ports-source-and-versions-of-m-u-g-e-n">
+<h1>Ports, Source and Versions of M.U.G.E.N</h1>
+<p>Q. How do I update my stuff to M.U.G.E.N 1.0?
+---
+M.U.G.E.N 1.0 is compatible with most content from 2002.  In order to use
+the new features in 1.0, you will need to update your characters, stages
+and motifs.  See:</p>
+<p><a class="reference external" href="http://elecbyte.com/wiki/index.php/Updating_to_1.0">http://elecbyte.com/wiki/index.php/Updating_to_1.0</a></p>
+<p>Q. I see unofficial versions of M.U.G.E.N on the web.  Can I use them?
+---
+Those releases are unauthorized hacks of an early private beta.  We won't take
+any responsibility for what happens if you use those, and we don't officially
+support any content made for them.</p>
+<p>If you host one of these unofficial versions on your website, please link to
+our site instead instead of those downloads.
+<a class="reference external" href="http://elecbyte.com/mugen">http://elecbyte.com/mugen</a></p>
+<p>Q. Will you port M.U.G.E.N to Mac/Linux/Dreamcast/etc?
+---
+Due to our limited resources, we are not considering any ports.</p>
+<p>Q. Will you release the source code?
+---
+While we appreciate the enthusiasm from fellow coders, we do not plan to release
+the source code to M.U.G.E.N.</p>
+<p>However, information about the file formats we use is publicly available.</p>
+<p>Q. Will future versions of M.U.G.E.N be compatible with my characters?
+---
+The goal for M.U.G.E.N 1.0 is to be compatible with most of the existing
+content available today.  Future versions may sacrifice compatibility
+for new features.</p>
+</div>
+<div class="section" id="tools">
+<h1>Tools</h1>
+<p>Q. I clicked sprmake2.exe (or other tool) and nothing happens. What's wrong?
+---
+Our tools require you to use them from the command prompt.  Click Start -&gt; Run
+and enter &quot;cmd&quot; (without the quotes) and press enter.  If you are using Windows
+Vista or Windows 7, you can shift-right-click on your mugen folder and choose
+&quot;Open command window here&quot;.</p>
+<p>Q. Are there any graphical tools available?
+---
+There are currently no first-party graphical tools for editing characters,
+stages or motifs.</p>
+<p>If you have made one and would like it listed in this FAQ, please let us know.</p>
+</div>
+</div>
+</body>
+</html>

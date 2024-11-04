@@ -1,0 +1,753 @@
+;该文档由千寻平台翻译，如果您是MUGEN爱好者，欢迎访问qxmugen.com！
+
+;系统界面定义
+
+; 画面包: MUGEN1
+; 分辨率: 1280x720
+; 支持语言: 英语, 日语
+
+; 关于字体:
+;   - 可以在[Files]区下定义10个字体.
+;   - 这里的字体不会影响fight.def中的字体
+;   - 系统会按以下顺序检索字体文件:
+;     1. system.def指定的路径
+;     2. mugen主程序同级目录 (不推荐将更改过的字体文件放在这里)
+;     3. 主程序同级的data文件夹下 (不推荐将更改过的字体文件放在这里)
+;     4. 主程序同级的font文件夹下
+
+;----------------------------
+[Info]
+name = "MUGEN16"           ;画面包的名字
+author = "Elecbyte"       ;作者名
+versiondate = 01,01,2011  ;制作时间 (MUGEN 1.0版新特性)
+mugenversion = 1.0        ;主程序版本 (MUGEN 1.0版新特性)
+localcoord = 1280,720     ;主程序窗口宽高，1.0以上的版本默认1280,720，常用的还有640,480，WIN版是默认的320,240 (MUGEN 1.0版新特性)
+
+;----------------------------
+;系统会按以下顺序检索文件:
+;1. system.def指定的路径
+;2. data文件夹下
+;3. mugen主程序同级目录
+;例如：如果你写 "spr = system.sff", 并且system.def文件中写~/mugen/data/mymotif/,那么Mugen会先去找~/mugen/data/mymotif/system.sff.
+;    如果找不到，那么会自动去招 ~/mugen/data/system.sff (默认).
+;    如果还找不到，那么最后会去找~/mugen/system.sff. 
+
+
+[Files]	;各种文件的引用
+spr = system.sff          ;主界面和选人界面用到的图片文件是system.sff
+snd = system.snd          ;声音文件
+logo.storyboard =         ;进入主界面之前播放的logo动画文件，类似于ubisoft这样的，没有就为空 (选填)
+intro.storyboard =        ;logo之后播放的开场动画文件，没有就为空(选填)
+select = select.def       ;选人文件
+fight = fight.def         ;战斗血条相关文件
+;系统字体
+font1 = f-4x6.def	;第一种字体
+font2 = name14.def	;第二种字体
+font3 = enter48.def	;第三种字体
+font4 = arcade.def
+font5 = mssansserif-tt36.def
+;font5.height = 36         ;字体的高度（如果你嫌对应字体显示的太小或者太大，可以用这个来改变，如果合适，这个就不需要了 (只对Truetype的字体有用)
+font6 = infofont.def
+
+;如果是日语模式，则使用下面的配置（主要是针对不同语言的字体）
+[ja.Files]
+spr = system.sff          ;主界面和选人界面用到的图片文件是system.sff
+snd = system.snd          ;声音文件
+logo.storyboard =         ;进入主界面之前播放的logo动画文件，类似于ubisoft这样的，没有就为空 (选填)
+intro.storyboard =        ;logo之后播放的开场动画文件，没有就为空(选填)
+select = select.def       ;选人文件
+fight = fight.def         ;战斗血条相关文件
+;系统字体
+font1 = f-4x6.def	;第一种字体
+font2 = name14.def	;第二种字体
+font3 = enter48.def	;第三种字体
+font4 = arcade.def
+font5 = msgothic-tt36.def
+;font5.height = 36         ;字体的高度（如果你嫌对应字体显示的太小或者太大，可以用这个来改变，如果合适，这个就不需要了 (只对Truetype的字体有用)
+font6 = msgothic-tt36.def
+font6.height = 13
+
+;----------------------------
+[Music]
+ ;支持MOD、MP3、MIDI格式, 如果不想要音乐可以为空，如果文件名无效则不播放
+ ;如果要播放sound/文件夹下的mymusic.mp3就这么写: title.bgm = sound/mymusic.mp3
+ ;如果两个切换的界面音乐文件名相同，则会在切换界面时继续播放该音乐并且两个界面都会循环
+
+;主界面音乐
+title.bgm = sound/op2.mp3 ;音乐文件名
+title.bgm.volume = 100    ;音量，这里填百分数
+title.bgm.loop = 1        ;主界面音乐是否循环，0为不循环，1为循环，以下涉及循环的同理
+title.bgm.loopstart = 	;开始循环的时间点，单位是帧
+title.bgm.loopend = 	;结束循环的时间点，单位是帧
+;选人界面音乐，参数同上
+select.bgm = sound/select.mp3
+select.bgm.volume = 
+select.bgm.loop = 1
+select.bgm.loopstart =
+select.bgm.loopend = 
+;VS界面音乐，参数同上
+vs.bgm = sound/vs.mp3
+vs.bgm.volume = 
+vs.bgm.loop = 0
+vs.bgm.loopstart =
+vs.bgm.loopend = 
+;胜利界面音乐，参数同上
+victory.bgm = sound/win.mp3
+victory.bgm.volume =
+victory.bgm.loop = 0
+victory.bgm.loopstart =
+victory.bgm.loopend = 
+
+;-------------------------------------------------------------------
+;主界面定义
+[Title Info]
+fadein.time = 10		;淡入主界面的时间，单位为帧
+fadeout.time = 10		;淡出主界面的时间，单位为帧
+menu.pos = 640,380		;主题背景的选项菜单的x,y位置，单位是像素，坐标0,0在左上角，即图片中心距离左上角的距离
+menu.item.font = 4,0,0		;主界面选项字体（不包括光标移上去时的情况）
+				;参数分别是：[File]中第几号字体，填充颜色（参数取决于所用字体内含的颜色），对齐方式（0为居中,非0为左对齐缩进），(选填)后面还可以再跟R,G,B颜色参数
+menu.item.active.font = 4,5,0, 224,240,240	;光标移到选项上时的字体，参数同上，最后多的三个参数是填充颜色的RGB值
+menu.item.spacing = 0, 54	;菜单选项之间的x,y距离
+;以下是主界面的每个选项的名字，必填。
+;填""表示禁用该选项，如果所有都被禁用将直接进入demo模式（按住Esc键退出demo）
+menu.itemname.arcade = "ARCADE"			;街机闯关模式
+menu.itemname.versus = "VS MODE"		;手操1v1对战模式
+menu.itemname.teamarcade = "TEAM ARCADE"	;组队街机闯关模式
+menu.itemname.teamversus = "TEAM VS"		;手操组队对战模式
+menu.itemname.teamcoop = "TEAM CO-OP"		;双人手操合作组队模式
+menu.itemname.survival = "SURVIVAL"		;生存模式
+menu.itemname.survivalcoop = "SURVIVAL CO-OP"	;双人生存模式
+menu.itemname.training = "TRAINING"		;练习模式
+menu.itemname.watch = "WATCH"			;观战模式
+menu.itemname.options = "OPTIONS"		;选项
+menu.itemname.exit = "EXIT"			;退出
+
+menu.window.margins.y = 40, 34		;决定选项界面显示的上下边距，参数分别是：上边距,下边距
+menu.window.visibleitems = 5		;一次可见的选项数，移动到最后一个数的选项会向下翻页
+menu.boxcursor.visible = 1    		;光标是否可见，0为不可见，1为可见
+menu.boxcursor.coords = -298,-35,298,6	;光标尺寸
+;以下是光标移动时的声音
+cursor.move.snd = 100,0
+cursor.done.snd = 100,1
+cancel.snd = 100,2
+
+;----------------------------
+;主界面背景定义，该用法和场景一致
+[TitleBGdef]
+bgclearcolor = 0,0,0		;背景RGB色(红，绿，蓝)
+
+[TitleBG Background Top]	;主界面背景1
+type  = normal			;类型
+spriteno = 100,0		;用到的图片编号
+layerno = 0			;坐标
+start = 0,0			;宽度
+tile  = 1,1			;图片间距
+velocity = -1, -1		;速度
+window = 0,0, 1279,334
+
+[TitleBG Background Middle]
+type  = normal
+spriteno = 100,1
+layerno = 0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+window = 0,335, 1279,631
+
+[TitleBG Background Bottom]
+type  = normal
+spriteno = 100,0
+layerno = 0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+window = 0,632, 1279,959
+
+[TitleBG 1]
+type  = normal
+spriteno = 100,0
+layerno = 0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+window = 0,332, 1279,334
+trans = add1
+
+[TitleBG 2]
+type  = normal
+spriteno = 100,0
+layerno = 0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+window = 0,632, 1279,634
+trans = add1
+
+[TitleBG Title Logo]
+type  = normal
+spriteno = 0,0
+layerno = 0
+start = 0,140
+mask = 1
+
+;----------------------------
+[Infobox] ;(MUGEN 1.0新特性，第一次运行时弹出框的文字)
+text.font = 6,0,1	;字体参数
+
+;----------------------------
+[Infobox Text] ;(MUGEN 1.0新特性)
+Welcome to M.U.G.E.N 1.1 alpha!
+;欢迎使用 M.U.G.E.N 1.1 alpha版!
+_
+* This is a development build, for testing purposes. Please don't redistribute it.
+;这是个测试用的开发版本，请不要分流
+_
+*This release isn't stable and may contain bugs and incomplete features. If you are looking for a stable build, get the latest M.U.G.E.N 1.0 from elecbyte.com. 
+;这个版本并不稳定，可能还有bug和没完成的特性。如果你想找一个稳定版，那么请到elecbyte.com下载1.0稳定版。
+_
+* We may change features without notice between development builds. Since things may break, we don't recommend you release anything using the new features except to the 1.1 testing community.
+;我们在版本更迭时可能不会写一些说明，我们不建议您使用1.1版本外的心特性。
+_
+* Alpha testers please report bugs in elecbyte.com/forum in the MUGEN 1.1 section.
+;alpha版的测试者们请elecbyte.com/forum上报告MUGEN 1.1的bug
+_
+* Your help and cooperation are appreciated!
+;非常感谢你们的帮助与合作！
+
+;----------------------------
+[ja.Infobox Text] ;(日文版弹出框文字，就不翻译了)
+M.U.G.E.N 1.1α をご利用いただいてありがとうございます！
+_
+このメッセージは、data/mugen1/system.defで編集できます。
+
+;-------------------------------------------------------------------
+;选人界面的定义
+[Select Info]
+fadein.time = 10	;同主界面
+fadeout.time = 10
+rows = 18;4		;行数
+columns = 14;3		;列数
+wrapping = 1              ;设为1会使光标包围格子（更改后没发现有变化，大部分画面包都是1）
+pos = 260,05             ;第一个选人格子坐标
+showemptyboxes = 1        ;1为显示空格子
+moveoveremptyboxes = 1    ;1为允许移动到空格子上
+cell.size = 50,50         ;每个格子的xy大小(单位为像素)
+cell.spacing = 3.5          ;格子间距
+cell.bg.spr = 150,0       ;格子的背景图片编号，注意，不要在格子上使用动画
+cell.random.spr = 151,0   ;随机格子的图片编号 (不要用动画)
+cell.random.switchtime = 4;随机格子的变化时间
+
+
+;p1选人相关参数
+p1.cursor.startcell = 9,4	;P1选人的起始格子的位置
+p1.cursor.active.anim = 160	;P1选人格子用的动作编号
+p1.cursor.done.spr = 161,0	;P1选人向下用到图片编号，也支持动画，需将该行替换为p1.cursor.done.anim = 
+p1.cursor.move.snd = 100,0	;P1光标移动的声音
+p1.cursor.done.snd = 100,1	;P1完成选人的声音
+p1.random.move.snd = 100,0	;P1在随机选人格子上的声音
+;以下p2参数同p1
+p2.cursor.startcell = 9,10
+p2.cursor.active.anim = 170
+p2.cursor.done.spr = 171,0
+p2.cursor.blink = 1       	;设为1时，2p和1p光标重叠时，2p的光标会闪烁
+p2.cursor.move.snd = 100,0
+p2.cursor.done.snd = 100,1
+p2.random.move.snd = 100,0
+
+random.move.snd.cancel = 0	;（关于随机选择的声音参数，修改后没发现区别，暂且不翻译）1 to have random move sound cancel itself when played repeatedly
+stage.move.snd = 100,0		;选择背景的声音
+stage.done.snd = 100,1		;选中背景的声音
+cancel.snd = 100,2		;取消选择的声音
+portrait.spr = 9000,0     ;人物小头像的图片编号，不要改，因为大部分人物都是这个编号
+portrait.offset = 0,0	;人物小头像相对格子的偏移量，一般保持0,0即可
+portrait.scale = 0.5,0.5;小头像的缩放比例（这个要调好，不然头像会超出格子或者不满格子）
+title.offset = 640,38     ;标题的位置 (比如Arcade Mode等)
+title.font = -1,0,0        ;标题的字体 (-1表示不显示)
+;p1大头像/半身像参数
+p1.face.spr = 9000,1      ;p1的人物大头像的图片编号
+p1.face.offset = 10,75      ;p1的人物大头像相对于右上角的偏移量
+p1.face.scale = 0.5,0.5 ;P1大头像的显示比例，这个也要调整好，道理同上
+p1.face.facing = 1	  ;P1大头像的方向
+p1.face.window = 0,0, 739,959	;P1大头像的窗口，前两个参数为左上角xy坐标，后两个参数为右下角xy坐标
+;p2大头像/半身像参数，同p1
+p2.face.spr = 9000,1
+p2.face.offset = 1275,75
+p2.face.scale = 0.5,0.5
+p2.face.facing = -1
+p2.face.window = 540,0, 1279,959
+;名字
+p1.name.offset = 0,400   ;p1名字的位置
+p1.name.font = 3,3,1      ;设为-1则不显示
+p1.name.spacing = 15,35   ;p1侧同队中的名字xy间隔
+p2.name.offset = 1260,400 ;p2参数同上
+p2.name.font = 3,1,-1
+p2.name.spacing = -15,35
+;场景选择
+stage.pos = 640,700		;选择背景的位置
+stage.active.font = 3,0,0	;选择背景的字体
+stage.active2.font = 3,2  	;文字闪烁时的第二个字体参数
+stage.done.font = 3,0		;选择完成时的字体
+;选择团队模式的菜单
+teammenu.move.wrapping = 1
+p1.teammenu.pos = 80, 130	;P1选择团队模式的菜单位置
+;p1.teammenu.bg.spr =		;P1侧选择团队模式的位置
+p1.teammenu.selftitle.font = 3,3,1	;菜单标题字体参数
+p1.teammenu.selftitle.text = "TEAM MODE"	;菜单标题显示的内容
+p1.teammenu.enemytitle.font = 3,3,1	;对方的菜单标题的字体参数
+p1.teammenu.enemytitle.text = "TEAM MODE"	;对方显示的菜单标题内容
+p1.teammenu.move.snd = 100,0	;移动音效
+p1.teammenu.value.snd = 100,0	;调整队伍人数的音效
+p1.teammenu.done.snd = 100,1	;选择完成音效
+p1.teammenu.item.offset = 0,110	;菜单选项相对于菜单位置的坐标
+p1.teammenu.item.spacing = 0,60	;选项之间的xy间距
+p1.teammenu.item.font = 3,0,1	;选项字体
+p1.teammenu.item.active.font = 3,3,1	;光标移到选项上的字体
+p1.teammenu.item.active2.font = 3,3, 1, 224,224,240 ;文字闪烁时的第二个字体参数
+p1.teammenu.item.cursor.offset = -30, 0	;选项光标的相对于菜单坐标的偏移量
+p1.teammenu.item.cursor.anim = 180	;光标的动作号
+p1.teammenu.value.icon.offset = 210,1	;调整人数的图片相对于菜单坐标的偏移量
+p1.teammenu.value.icon.spr = 181,0	;调整人数的图片编号
+p1.teammenu.value.empty.icon.offset = 210,1	;调整人数的空图片相对于菜单坐标的偏移量，一般和非空图片一样
+p1.teammenu.value.empty.icon.spr = 182,0	;调整人数的空图片编号
+p1.teammenu.value.spacing = 30,0		;调整人数的图标与选项文字的距离
+;p2参数，同p1
+p2.teammenu.pos = 1200, 130
+;p2.teammenu.bg.spr =
+p2.teammenu.selftitle.font = 3,1, -1
+p2.teammenu.selftitle.text = "TEAM MODE"
+p2.teammenu.enemytitle.font = 3,1, -1
+p2.teammenu.enemytitle.text = "TEAM MODE"
+p2.teammenu.move.snd = 100,0
+p2.teammenu.value.snd = 100,0
+p2.teammenu.done.snd = 100,1
+p2.teammenu.item.offset = 0,110
+p2.teammenu.item.spacing = 0,60
+p2.teammenu.item.font = 3,0, -1
+p2.teammenu.item.active.font = 3,1, -1
+p2.teammenu.item.active2.font = 3,1, -1, 224,224,240 ;Second font color for blinking
+p2.teammenu.item.cursor.offset = 30, 0
+p2.teammenu.item.cursor.anim = 190
+p2.teammenu.value.icon.offset = -210,1
+p2.teammenu.value.icon.spr = 191,0
+p2.teammenu.value.empty.icon.offset = -210,1
+p2.teammenu.value.empty.icon.spr = 192,0
+p2.teammenu.value.spacing = -30,0
+;Debgu界面参数 (可以用于测试字体)
+;sysexplod0.text =
+;sysexplod0.font =
+
+[Begin Action 160] ;P1 光标动作参数
+160,6, 0,0, 1
+160,5, 0,0, 1
+160,4, 0,0, 1
+160,3, 0,0, 1
+160,2, 0,0, 1
+160,1, 0,0, 1
+160,0, 0,0, 1
+
+[Begin Action 170] ;P2 光标动作参数
+170,3, 0,0, 1
+170,2, 0,0, 1
+170,1, 0,0, 1
+170,0, 0,0, 1
+170,6, 0,0, 1
+170,5, 0,0, 1
+170,4, 0,0, 1
+
+[Begin Action 180] ;P1 队伍模式光标动作参数
+180,0, 0,0, 1
+180,0, 3,0, 1
+180,0, 6,0, 1
+180,0, 9,0, 1
+180,0,12,0, 1
+180,0,15,0, 1
+180,0,18,0, 1
+180,0,21,0, 1
+
+[Begin Action 190] ;P2 队伍模式光标动作参数
+190,0, 0,0, 1
+190,0,-3,0, 1
+190,0,-6,0, 1
+190,0,-8,0, 1
+190,0,-12,0, 1
+190,0,-15,0, 1
+190,0,-18,0, 1
+190,0,-21,0, 1
+
+;-----------------------
+;选人界面背景定义
+[SelectBGdef]
+;spr = graphics/selectbg.sff  ;选人的背景sff文件名
+
+[SelectBG 0] ;Scrolling background
+type  = normal
+spriteno = 100,0
+layerno = 0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+
+[SelectBG 2.A] ;Title background
+type  = normal
+spriteno = 102,0
+layerno = 0
+start = 0, 4
+delta = 0,0
+tile  = 1,3
+trans = sub
+velocity = -1, 0
+
+[SelectBG 2.B] ;Title background B
+type  = normal
+spriteno = 102,1
+layerno = 0
+start = 0, 4
+delta = 0,0
+tile  = 1,3
+trans = add
+velocity = -3, 0
+
+[SelectBG 2.C] ;Title background C
+type  = normal
+spriteno = 102,2
+layerno = 0
+start = 0, 4
+delta = 0,0
+tile  = 1,3
+trans = add
+velocity = -9, 0
+
+;-------------------------------------------------------------------
+[VS Screen]
+;对战VS界面
+time = 150                ;VS画面显示的时间，单位是帧，60帧为1秒
+fadein.time = 20
+fadeout.time = 25
+;闯关(arcade)模式下的第几关文字
+match.text = "Match %i"   ;%i表示第几关
+match.offset = 20, 709	;文字偏移量
+match.font = 2,0,1	;字体
+;p1大头像参数
+p1.spr = 9000, 1	;p1图像编号
+p1.offset =  60,30	;p1图像坐标
+p1.facing = 1		;p1图像朝向
+p1.scale = 0.5,0.5	;p1图像缩放比例
+p1.window = 60,30, 539,589	;p1窗口坐标和大小
+;p2大头像参数，同p1
+p2.spr = 9000, 1
+p2.offset = 1220,30
+p2.facing = -1
+p2.scale = 0.5,0.5
+p2.window = 741,30, 1220,589
+;名字
+p1.name.offset = 110,650  ;p1名字的坐标
+p1.name.font = 3,3,1      ;p1名字的字体，-1为不显示
+p1.name.spacing = 0,44    ;p1队伍中各成员名字的间距
+p2.name.offset = 1170,650
+p2.name.font = 3,1,-1
+p2.name.spacing = 0,44
+
+;-----------------------
+;对战界面背景
+[VersusBGdef] 
+
+[VersusBG BG] 
+type  = normal
+spriteno = 204,0
+start = 0,0
+mask = 0
+
+[VersusBG BG for 4:3] 
+type  = normal
+spriteno = 100,0
+start = 0,0
+tile  = 1,1
+velocity = 0,0
+window = 0,720, 1279,959
+
+[VersusBG P1 Box 1]
+type = anim
+actionno = 203
+layerno = 1 ; Front
+start = -110,30
+velocity = .1,0
+
+[VersusBG P1 Box 2]
+type = anim
+actionno = 204
+layerno = 1 ; Front
+start = -110,30
+velocity = .1,0
+
+[VersusBG P1 Box 3]
+type = anim
+actionno = 205
+layerno = 1 ; Front
+start = -590,590
+velocity = .1,0
+
+[VersusBG P1 Box 4]
+type = anim
+actionno = 206
+layerno = 1 ; Front
+start = -590,590
+velocity = .1,0
+
+[VersusBG P2 Box 1]
+type = anim
+actionno = 207
+layerno = 1 ; Front
+start = 95,30
+velocity = .1,0
+
+[VersusBG P2 Box 2]
+type = anim
+actionno = 208
+layerno = 1 ; Front
+start = 95,30
+velocity = .1,0
+
+[VersusBG P2 Box 3]
+type = anim
+actionno = 209
+layerno = 1 ; Front
+start = 575,590
+velocity = .1,0
+
+[VersusBG P2 Box 4]
+type = anim
+actionno = 210
+layerno = 1 ; Front
+start = 575,590
+velocity = .1,0
+
+[VersusBG 4] ;VS Logo Shadow
+type  = anim
+actionno = 201
+layerno = 1 ; Front
+start = -18,300
+velocity = .25,0
+
+[VersusBG 5] ;VS Logo
+type  = anim
+actionno = 200
+layerno = 1 ; Front
+start = 0,300
+
+[VersusBG 6] ;Next Match
+type  = anim
+actionno = 202
+layerno = 1 ; Front
+start = 18,38
+velocity = -.25,0
+
+[Begin Action 200]
+200,0, 0,0, -1
+
+[Begin Action 201]
+201,0,-70,0, 1, , S
+201,0,-60,0, 1, , S
+201,0,-50,0, 1, , S
+201,0,-40,0, 1, , S
+201,0,-30,0, 1, , S
+201,0,-20,0, 1, , S
+201,0,-13,0, 1, , S
+201,0, -8,0, 1, , S
+201,0, -5,0, 1, , S
+201,0, -2,0, 1, , S
+201,0, -1,0, 1, , S
+201,0, 0,0, -1, , S
+
+[Begin Action 202]
+202,0,70,0, 1
+202,0,60,0, 1
+202,0,50,0, 1
+202,0,40,0, 1
+202,0,30,0, 1
+202,0,20,0, 1
+202,0,13,0, 1
+202,0, 8,0, 1
+202,0, 5,0, 1
+202,0, 2,0, 1
+202,0, 1,0, 1
+202,0, 0,0,-1
+
+[Begin Action 203]
+203,0, 0,0, -1, H, S
+
+[Begin Action 204]
+203,1, 0,0, -1, H, S
+
+[Begin Action 205]
+203,0, 0,0, -1, V, A
+
+[Begin Action 206]
+203,1, 0,0, -1, V, A
+
+[Begin Action 207]
+203,0, 0,0, -1, , S
+
+[Begin Action 208]
+203,1, 0,0, -1, , S
+
+[Begin Action 209]
+203,0, 0,0, -1, HV, A
+
+[Begin Action 210]
+203,1, 0,0, -1, HV, A
+
+;-------------------------------------------------------------------
+;demo模式定义，即在主菜单什么都不做，过一会儿后进行的自动战斗
+[Demo Mode]
+enabled = 1               ;是否启用, 0为不启用
+select.enabled = 1        ;1为显示选人界面，0为不显示
+vsscreen.enabled = 0      ;1为显示对战界面, 0为不显示
+title.waittime = 150      ;主菜单等待时间
+fight.endtime = 3000      ;战斗演示持续时间
+fight.playbgm = 1         ;1为启用战斗bgm，0为禁用
+fight.stopbgm = 1	      ;1为停止主菜单bgm(只有playbgm = 0时有用)
+fight.bars.display = 1    ;血条是否隐藏
+intro.waitcycles = 1      ;（改成0后没发现变化，暂不翻译）Cycles to wait before intro cutscene is played again
+debuginfo = 0             ;0为隐藏debug信息 (debug模式下才有用)
+
+;-------------------------------------------------------------------
+;续关界面，即战败后倒数的界面
+[Continue Screen]
+enabled = 1               ;1为显示续关界面，0为禁止续关
+pos = 640,240             ;位置
+;***须知*** 一下展示元素用的是fight.def中的资源，而不是本文件
+continue.text = "CONTINUE?"	;续关文字
+continue.font = 1,0,0		;续关文字字体
+continue.offset = 0,0		;文字偏移量
+;激活/不激活YES/NO文字
+yes.text = "YES"		;确定续关文字
+yes.font = 1,0,0, 128,128,128	;字体
+yes.offset = -80, 60		;偏移量
+yes.active.text = "YES"		;光标移到确定续关上的文字
+yes.active.font = 1,3,0		;光标移到确定续关上的文字字体
+yes.active.offset = -80, 60	;光标移到确定续关上的偏移量
+no.text = "NO"			;不续关文字，以下参数同上
+no.font = 1,0,0, 128,128,128
+no.offset = 80, 60
+no.active.text = "NO"
+no.active.font = 1,3,0
+no.active.offset = 80, 60
+
+;-------------------------------------------------------------------
+;游戏结束界面自定义
+[Game Over Screen]
+enabled = 0               ;1为显示Game Over界面，0为禁用
+storyboard =               ;游戏结束的动画文件，文件格式是def
+
+;-------------------------------------------------------------------
+;胜利界面参数，即在arcade模式下每过一关的胜利界面，但不是通关界面
+[Victory Screen]
+enabled = 1		;1为启用
+time = 600                ;显示持续时间
+fadein.time = 8		;淡入界面时间
+fadeout.time = 15	;淡出界面时间
+;胜利者的半身像和名字参数
+p1.offset = 400,-40
+p1.spr = 9000,2
+p1.facing = 1
+p1.scale = 0.5,0.5
+p1.window = 0,0, 1279,500
+p1.name.offset = 40,570
+p1.name.font = 3,3,1
+;胜利台词参数
+winquote.text = "人生の勝者！" ;默认的胜利台词
+winquote.offset = 40,615	;胜利台词的偏移量
+winquote.font = 5,0,1		;胜利台词的字体
+winquote.window = 38,521, 1241,708	;胜利台词的窗口坐标和大小
+winquote.textwrap = w     ;Word wrap
+
+;-----------------------
+;胜利界面背景参数
+[VictoryBGdef] 
+
+[VictoryBG 1] 
+type  = normal
+spriteno = 100,0
+start = 0,0
+tile  = 1,1
+velocity = 0,1.5
+window = 0,501, 1279,959
+
+[VictoryBG 2]
+type  = normal
+spriteno = 100,1
+start = 0,0
+tile  = 1,1
+window = 0,0, 1279,500
+velocity = 0,1.5
+
+[VictoryBG 3]
+type  = normal
+spriteno = 100,1
+start = 0,0
+tile  = 1,1
+window = 25,520, 1254,709
+velocity = 0,1.5
+
+;-------------------------------------------------------------------
+;通关画面定义，arcade模式通关后的动画定义，如果角色自己已经有了通关动画，那么这个就不播
+[Win Screen]
+enabled = 1               ;1为启用
+wintext.text = "Congratulations!";胜利台词
+wintext.font = 3,0,0		;字体
+wintext.offset = 640,240	;坐标
+wintext.displaytime = -1	;显示时间
+wintext.layerno = 2		;显示所在的层数
+fadein.time = 32
+pose.time = 300
+fadeout.time = 64
+
+;-------------------------------------------------------------------
+;游戏结局画面定义，会在通关画面后面播放，如果角色自己已经有了结局动画，那么这个就不播
+[Default Ending]
+enabled = 0               ;1为启用
+storyboard =              ;默认的动画文件
+
+;-------------------------------------------------------------------
+;Ending credits screen definition
+;This screen shows up after the Win Screen and Ending
+[End Credits]
+enabled = 0               ;Set to 1 to show credits, 0 to disable
+storyboard =              ;Credits storyboard filename
+
+;-------------------------------------------------------------------
+;survival模式的结果界面参数，即通关survival后的界面，如果角色自己已经有了通关动画，那么这个就不播
+[Survival Results Screen]
+enabled = 1
+winstext.text = "Rounds survived: %i"  ;%i表示胜利的场次
+winstext.font = 3,0,0
+winstext.offset = 640,240
+winstext.displaytime = -1
+winstext.layerno = 2
+fadein.time = 32
+show.time = 300
+fadeout.time = 64
+roundstowin = 5           ;胜利若干局后播放胜利动作
+
+;-------------------------------------------------------------------
+;从主界面进入option的选项界面
+[Option Info]
+fadein.time = 10	;标题坐标
+fadeout.time = 10	;标题字体
+title.offset = 640,38	;标题坐标
+title.font = 4,0,0	;标题字体
+cursor.move.snd = 100,0	;光标移动的声音
+cursor.done.snd = 100,1	;光标选择的声音
+cancel.snd = 100,2	;取消的声音
+
+;-------------------
+;选项界面的背景定义
+[OptionBGdef] 
+
+[OptionBG 1]	;设置背景1
+type  = normal
+spriteno = 100,0
+start = 0,0
+tile  = 1,1
+velocity = -1, -1
+
