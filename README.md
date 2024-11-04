@@ -1,4 +1,5 @@
 # mugen1.1chara600-autofight
+
 测试完成
 该版本有600多个格子，暂时比较够用，然后优化了自动战斗，打开程序什么都不干2秒就会自动战斗，另外优化了缓存，现在战斗基本是秒加载
 
@@ -17,7 +18,6 @@ three or four players in simultaneous mode.  This really only works in
 watch mode after pushing ctrl+1 to enable your player.  If you try this
 in other modes, all of your teammates will be controlled as if they're
 player 1.  That's not very fun.
-
 
 生存模式用这个
 3v3 ai357.exe
